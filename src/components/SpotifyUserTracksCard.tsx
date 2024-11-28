@@ -34,7 +34,13 @@ export const SpotifyUserTracksCard = ({
         }
     }
 
-    const handleSelectAll = (e) => {
+    interface HandleSelectAllEvent {
+        target: {
+            checked: boolean;
+        };
+    }
+
+    const handleSelectAll = (e: HandleSelectAllEvent) => {
         if(e.target.checked){
             setSelectAll('true');
             setSelectedMusic(userTracks)

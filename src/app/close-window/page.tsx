@@ -26,7 +26,7 @@ export default function CloseWindow({ searchParams }: { searchParams: SearchPara
   return (
     <div>
       <h1>Authentication Successful!</h1>
-      <p>You can close this window if it doesn't close automatically.</p>
+      <p>You can close this window if it doesnt close automatically.</p>
     </div>
   );
 }

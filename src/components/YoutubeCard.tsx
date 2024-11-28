@@ -53,7 +53,11 @@ export const YoutubeCard = ({
     const [currentYoutubeCard, setCurrentYoutubeCard] = useState<'YourTracks'|'Playlists'|''>('YourTracks')
     const [limit, setLimit] = useState<number>(0);
     const [offset, setOffset] = useState<number>(1);
-    const [youtubeTrackNextPage, setYoutubeTrackNextPage] = useState<string|''>('');
+    // const [youtubeTrackNextPage, setYoutubeTrackNextPage] = useState<string|''>('');
+
+    setUserYoutubeMusicTracks(null);
+    setUserYoutubePlaylists(null);
+    setLimit(0);
 
     const scrollRef = useRef<HTMLDivElement | null>(null);
 

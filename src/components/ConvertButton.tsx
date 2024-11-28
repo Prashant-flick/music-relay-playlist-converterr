@@ -24,7 +24,6 @@ export const ConvertButton = ({
     isYoutubeLoggedIn,
     addPlaylist,
     playlistName,
-    selectedPlaylistName,
     selectedMusic,
     selectedPlaylist,
     conversionOptions,

@@ -3,7 +3,7 @@ import axios from "axios";
 import Image from "next/image";
 import youtubeLogo from '../../public/fonts/youtube-music7134-removebg-preview.png'
 import { PlaylistsProps, TrackProps } from "./SpotifyToYoutubeCard";
-import { Minus, PencilLine, Plus } from "lucide-react";
+import { PencilLine } from "lucide-react";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { YoutubePlaylistProps } from "./YoutubeCard";
 
