@@ -5,8 +5,6 @@ import { NextResponse } from "next/server";
 export async function GET(){
     const cookie = cookies();
     const spotifyAccessToken = cookie.get('access_token')?.value
-    console.log(spotifyAccessToken);
-    console.log("here");
 
     if(spotifyAccessToken){
         const res = await axios.get('https://api.spotify.com/v1/me/playlists', {

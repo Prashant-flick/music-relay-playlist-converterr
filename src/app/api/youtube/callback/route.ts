@@ -18,7 +18,7 @@ export async function GET(req: Request) {
   
       const { tokens } = await oauth2Client.getToken(code);
 
-      if(tokens && tokens?.access_token){
+      if(tokens && tokens?.access_token){ 
         oauth2Client.setCredentials(tokens);
         const response = NextResponse.redirect('http://localhost:3000/close-window?type=youtube')
   

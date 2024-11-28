@@ -37,11 +37,12 @@ export const Card = ({
     }
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen w-screen bg-gray-50">
-            <div className="relative flex flex-row justify-evenly min-w-[1000px] min-h-[500px] shadow-2xl shadow-black">
+        <div className="flex flex-col items-center justify-center h-screen w-screen bg-1">
+            <h1 className="px-2 py-5 text-5xl font-extrabold">Music Relay</h1>
+            <div className="relative flex flex-row justify-evenly min-w-[1000px] min-h-[500px] shadow-2xl shadow-black bg-2">
             <button
                 onClick={handleSwitch}
-                className="absolute top-1.5 z-99 bg-gradient-to-r from-violet-500 to-violet-800 text-lg text-black font-semibold px-4 py-1 rounded-xl"
+                className="absolute top-1.5 z-99 bg-violet-600 text-lg text-black font-semibold px-4 py-1 rounded-xl"
             >
                 <ArrowRightLeft />
             </button>

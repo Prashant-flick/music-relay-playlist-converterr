@@ -147,7 +147,7 @@ export const ConvertButton = ({
                 :
                 <button
                     onClick={handleConvertion}
-                    className={`bg-gradient-to-r from-violet-500 to-violet-800 px-16 py-3 text-3xl font-semibold rounded-b-3xl ${isYoutubeLoggedIn==='true' && isSpotifyLoggedIn==='true' && 'hover:bg-violet-600'}`}
+                    className={`bg-violet-600 px-16 py-3 text-3xl font-semibold rounded-b-3xl ${isYoutubeLoggedIn==='true' && isSpotifyLoggedIn==='true' && 'hover:bg-violet-600'}`}
                     disabled={(isYoutubeLoggedIn==='false' || isSpotifyLoggedIn==='false')}
                 >
                     Convert

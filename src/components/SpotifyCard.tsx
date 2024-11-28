@@ -106,7 +106,7 @@ export const SpotifyCard = ({
     }
 
     return (
-        <div className="flex min-w-[500px] max-w-[500px] min-h-[500px] bg-gray-100 border-r-2 border-gray-500">
+        <div className="flex min-w-[500px] max-w-[500px] min-h-[500px] border-r-2 border-gray-500">
             {
                 isSpotifyLoggedIn==='false' &&
                 <div className="w-full h-full flex items-center justify-center">

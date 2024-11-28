@@ -86,7 +86,7 @@ export const SpotifyTrackSelectionCard = ({
     },[currentSpotifyCard, setConversionOption])
 
     return (
-        <div className="flex min-w-[500px] max-w-[500px] min-h-[500px] bg-gray-100">
+        <div className="flex min-w-[500px] max-w-[500px] min-h-[500px]">
             {
                 isYoutubeLoggedIn==='false' &&
                 <div className="w-full h-full flex items-center justify-center">
@@ -101,7 +101,7 @@ export const SpotifyTrackSelectionCard = ({
             {
                 isYoutubeLoggedIn==='true' && currentSpotifyCard==='YourTracks' &&
                 <div className="w-full h-full flex flex-col">
-                    <div className="max-h-[460px] min-h-[460px] max-w-full h-full overflow-y-scroll gap-1 overflow-hidden">
+                    <div className="max-h-[460px] min-h-[460px] max-w-full h-full gap-1">
                     <div className="min-h-[44px] max-h-[44px] border-b-2 border-gray-500 py-1" />
                         {
                             conversionOptions === '' &&
@@ -110,7 +110,7 @@ export const SpotifyTrackSelectionCard = ({
                                     onClick={() => {
                                         setConversionOption('AddToLiked')
                                     }}
-                                    className="text-3xl font-bold text-black px-6 py-3 bg-gradient-to-r from-violet-600 to-violet-800 rounded-xl"
+                                    className="text-3xl font-bold text-black px-6 py-3 bg-violet-500 rounded-xl"
                                 >
                                     Add To Liked
                                 </button>
@@ -118,7 +118,7 @@ export const SpotifyTrackSelectionCard = ({
                                     onClick={() => {
                                         setConversionOption('CreatePlaylist')
                                     }} 
-                                    className="text-3xl font-bold text-black px-6 py-3 bg-gradient-to-r from-violet-600 to-violet-800 rounded-xl"
+                                    className="text-3xl font-bold text-black px-6 py-3 bg-violet-500 rounded-xl"
                                 >
                                     Create New Playlist
                                 </button>
@@ -126,14 +126,14 @@ export const SpotifyTrackSelectionCard = ({
                                     onClick={() => {
                                         setConversionOption('addToExistingPlaylist')
                                     }} 
-                                    className="text-3xl font-bold text-black px-6 py-3 bg-gradient-to-r from-violet-600 to-violet-800 rounded-xl">
+                                    className="text-3xl font-bold text-black px-6 py-3 bg-violet-500 rounded-xl">
                                     Add To Existing Playlist
                                 </button>
                             </div>   
                         }
                         {
                             currentSpotifyCard === 'YourTracks' && conversionOptions === 'AddToLiked' &&
-                            <div className="flex flex-col justify-start">
+                            <div className="flex max-h-[460px] min-h-[460px] flex-col justify-start overflow-hidden overflow-y-scroll">
                                 <div className="flex gap-1 px-2 relative bg-gray-200 py-1">
                                     <h1
                                         className="text-base font-bold"
@@ -159,7 +159,7 @@ export const SpotifyTrackSelectionCard = ({
 
                         {   
                             currentSpotifyCard === 'YourTracks' && conversionOptions === 'CreatePlaylist' &&
-                            <div className="flex flex-col justify-start">
+                            <div className="flex flex-col justify-start max-h-[460px] min-h-[460px] overflow-hidden overflow-y-scroll">
                                 <div className="flex gap-1 px-2 bg-gray-200 py-1">
                                     <input
                                         ref={inputRef}
@@ -201,7 +201,7 @@ export const SpotifyTrackSelectionCard = ({
                         
                         {   
                             currentSpotifyCard === 'YourTracks' && conversionOptions === 'addToExistingPlaylist' &&
-                            <div className="flex flex-col justify-start">
+                            <div className="flex flex-col justify-start max-h-[460px] min-h-[460px] overflow-hidden overflow-y-scroll">
                                 <h1 className="flex gap-1 px-2 relative bg-gray-200 py-1 text-base font-bold">Choose Playlist</h1> 
                             {
                                 userPlaylists && userPlaylists.length>0 &&
@@ -252,7 +252,7 @@ export const SpotifyTrackSelectionCard = ({
             }
             {
                 isYoutubeLoggedIn==='true' && currentSpotifyCard==='Playlists' &&
-                <div className="w-full h-full flex flex-col">
+                <div className="w-full h-full flex flex-col overflow-hidden overflow-y-scroll">
                     <div className="min-h-[44px] max-h-[44px] border-b-2 border-gray-500 py-1"/>
                     {
                         conversionOptions === '' &&
@@ -261,7 +261,7 @@ export const SpotifyTrackSelectionCard = ({
                                 onClick={() => {
                                     setConversionOption('CreatePlaylist')
                                 }} 
-                                className="text-3xl font-bold text-black px-6 py-3 bg-gradient-to-r from-violet-600 to-violet-800 rounded-xl"
+                                className="text-3xl font-bold text-black px-6 py-3 bg-violet-500 rounded-xl"
                             >
                                 Create New Playlist
                             </button>
@@ -269,7 +269,7 @@ export const SpotifyTrackSelectionCard = ({
                                 onClick={() => {
                                     setConversionOption('addToExistingPlaylist')
                                 }} 
-                                className="text-3xl font-bold text-black px-6 py-3 bg-gradient-to-r from-violet-600 to-violet-800 rounded-xl">
+                                className="text-3xl font-bold text-black px-6 py-3 bg-violet-500 rounded-xl">
                                 Add To Existing Playlist
                             </button>
                         </div>   
