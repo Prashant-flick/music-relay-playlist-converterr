@@ -32,8 +32,12 @@ export const ConvertButton = ({
 
     const [loading, setLoading] = useState<boolean>(false);
     const toast = useToast();
+    console.log(selectedPlaylist);
+    
 
     const handleConvertion = async() => {
+        console.log("here");
+        console.log(selectedMusic);
         if(selectedMusic && selectedMusic.length<=0 && !selectedPlaylist){
             toast?.open({
                 message: "Add some music and playlist to convert",
@@ -58,9 +62,10 @@ export const ConvertButton = ({
             return;
         }
 
+
         if(selectedMusic && selectedMusic.length>0 && conversionOptions!=='' && isYoutubeLoggedIn==='true' && isSpotifyLoggedIn==='true'){
             setLoading(true)
-            try {
+            try {                
                 const youtubeMusicIds = await getYoutubeTracksIds({spotifyMusic: selectedMusic, spotifyPlaylist:null})
                 if(youtubeMusicIds && youtubeMusicIds.length>0){
                     if(conversionOptions==='AddToLiked'){
@@ -140,13 +145,13 @@ export const ConvertButton = ({
         <>
             {
                 loading ?
-                <div className={`bg-gradient-to-r from-violet-500 to-violet-800 px-16 py-3 text-3xl font-semibold rounded-b-3xl`}>
+                <div className={`bg-1 px-16 py-3 text-3xl font-semibold rounded-b-3xl`}>
                     Loading...
                 </div>
                 :
                 <button
                     onClick={handleConvertion}
-                    className={`bg-violet-600 px-16 py-3 text-3xl font-semibold rounded-b-3xl ${isYoutubeLoggedIn==='true' && isSpotifyLoggedIn==='true' && 'hover:bg-violet-600'}`}
+                    className={`bg-1 border-2 hover:bg-blue-300 z-10 border-black px-16 py-3 text-3xl font-semibold mt-2 rounded-3xl ${isYoutubeLoggedIn==='true' && isSpotifyLoggedIn==='true' && 'hover:bg-1'}`}
                     disabled={(isYoutubeLoggedIn==='false' || isSpotifyLoggedIn==='false')}
                 >
                     Convert

@@ -110,7 +110,7 @@ export const SpotifyTrackSelectionCard = ({
                                     onClick={() => {
                                         setConversionOption('AddToLiked')
                                     }}
-                                    className="text-3xl font-bold text-black px-6 py-3 bg-violet-500 rounded-xl"
+                                    className="text-3xl font-bold text-black px-6 py-3 bg-1 rounded-xl"
                                 >
                                     Add To Liked
                                 </button>
@@ -118,7 +118,7 @@ export const SpotifyTrackSelectionCard = ({
                                     onClick={() => {
                                         setConversionOption('CreatePlaylist')
                                     }} 
-                                    className="text-3xl font-bold text-black px-6 py-3 bg-violet-500 rounded-xl"
+                                    className="text-3xl font-bold text-black px-6 py-3 bg-1 rounded-xl"
                                 >
                                     Create New Playlist
                                 </button>
@@ -126,7 +126,7 @@ export const SpotifyTrackSelectionCard = ({
                                     onClick={() => {
                                         setConversionOption('addToExistingPlaylist')
                                     }} 
-                                    className="text-3xl font-bold text-black px-6 py-3 bg-violet-500 rounded-xl">
+                                    className="text-3xl font-bold text-black px-6 py-3 bg-1 rounded-xl">
                                     Add To Existing Playlist
                                 </button>
                             </div>   
@@ -134,7 +134,7 @@ export const SpotifyTrackSelectionCard = ({
                         {
                             currentSpotifyCard === 'YourTracks' && conversionOptions === 'AddToLiked' &&
                             <div className="flex max-h-[460px] min-h-[460px] flex-col justify-start overflow-hidden overflow-y-scroll">
-                                <div className="flex gap-1 px-2 relative bg-gray-200 py-1">
+                                <div className="flex gap-1 px-2 relative bg-gray-300 py-1">
                                     <h1
                                         className="text-base font-bold"
                                     >
@@ -160,7 +160,7 @@ export const SpotifyTrackSelectionCard = ({
                         {   
                             currentSpotifyCard === 'YourTracks' && conversionOptions === 'CreatePlaylist' &&
                             <div className="flex flex-col justify-start max-h-[460px] min-h-[460px] overflow-hidden overflow-y-scroll">
-                                <div className="flex gap-1 px-2 bg-gray-200 py-1">
+                                <div className="flex gap-1 px-2 bg-gray-300 py-1">
                                     <input
                                         ref={inputRef}
                                         className={`text-base font-bold bg-transparent outline-none ${
@@ -202,7 +202,7 @@ export const SpotifyTrackSelectionCard = ({
                         {   
                             currentSpotifyCard === 'YourTracks' && conversionOptions === 'addToExistingPlaylist' &&
                             <div className="flex flex-col justify-start max-h-[460px] min-h-[460px] overflow-hidden overflow-y-scroll">
-                                <h1 className="flex gap-1 px-2 relative bg-gray-200 py-1 text-base font-bold">Choose Playlist</h1> 
+                                <h1 className="flex gap-1 px-2 relative bg-gray-300 py-1 text-base font-bold">Choose Playlist</h1> 
                             {
                                 userPlaylists && userPlaylists.length>0 &&
                                 userYoutubePlaylists?.map((elem, index) => {
@@ -261,7 +261,7 @@ export const SpotifyTrackSelectionCard = ({
                                 onClick={() => {
                                     setConversionOption('CreatePlaylist')
                                 }} 
-                                className="text-3xl font-bold text-black px-6 py-3 bg-violet-500 rounded-xl"
+                                className="text-3xl font-bold text-black px-6 py-3 bg-1 rounded-xl"
                             >
                                 Create New Playlist
                             </button>
@@ -269,7 +269,7 @@ export const SpotifyTrackSelectionCard = ({
                                 onClick={() => {
                                     setConversionOption('addToExistingPlaylist')
                                 }} 
-                                className="text-3xl font-bold text-black px-6 py-3 bg-violet-500 rounded-xl">
+                                className="text-3xl font-bold text-black px-6 py-3 bg-1 rounded-xl">
                                 Add To Existing Playlist
                             </button>
                         </div>   
@@ -305,7 +305,7 @@ export const SpotifyTrackSelectionCard = ({
                     {
                         (currentSpotifyCard === 'Playlists' && conversionOptions === 'addToExistingPlaylist' && selectedPlaylist) &&
                         <div className="flex flex-col justify-start">
-                            <h1 className="flex gap-1 px-2 relative bg-gray-200 py-1 text-base font-bold">Selected Playlist</h1>
+                            <h1 className="flex gap-1 px-2 relative bg-gray-300 py-1 text-base font-bold">Selected Playlist</h1>
                             <div className="flex justify-start items-center pl-2">
                                 <Image src={selectedPlaylist?.images[0]?.url} alt="" width={50} height={50} />
                                 <div className="flex flex-col items-start justify-start px-3 py-1">
@@ -315,7 +315,7 @@ export const SpotifyTrackSelectionCard = ({
                                     <h3>{selectedPlaylist?.tracks?.total} Tracks</h3>
                                 </div>
                             </div>
-                            <h1 className="flex gap-1 px-2 relative bg-gray-200 py-1 text-base font-bold">Choose Playlist</h1> 
+                            <h1 className="flex gap-1 px-2 relative bg-gray-300 py-1 text-base font-bold">Choose Playlist</h1> 
                         {
                             userPlaylists && userPlaylists.length>0 &&
                             userYoutubePlaylists?.map((elem, index) => {

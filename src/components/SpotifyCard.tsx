@@ -19,6 +19,8 @@ interface SpotifyCardProps {
     setSelectedPlaylists: Dispatch<SetStateAction<PlaylistsProps|null>>,
     currentSpotifyCard: ''|'YourTracks'|'Playlists',
     setCurrentSpotifyCard: Dispatch<SetStateAction<''|'YourTracks'|'Playlists'>>,
+    totalLikedSongs: number | null,
+    setTotalLikedSongs: Dispatch<SetStateAction<number|null>>,
 }
 
 export const SpotifyCard = ({
@@ -33,6 +35,8 @@ export const SpotifyCard = ({
     setSelectedPlaylists,
     currentSpotifyCard,
     setCurrentSpotifyCard,
+    setTotalLikedSongs,
+    totalLikedSongs,
 }: SpotifyCardProps) => {    
     
     const [nextPageTrackUrl, setNextPageTrackUrl] = useState<string>('https://api.spotify.com/v1/me/tracks');
@@ -73,6 +77,7 @@ export const SpotifyCard = ({
                     setLimit((prev) => prev+(res?.data?.items?.length));
                     setNextPageTrackUrl(res?.data?.next);
                     setUserTracks((prev) => prev ? [...prev, ...res?.data?.items]: res?.data?.items);
+                    setTotalLikedSongs(res?.data?.total);
                 } catch (error) {
                     console.error(error);
                 }
@@ -92,7 +97,7 @@ export const SpotifyCard = ({
                 console.error(error);
             }
         }
-    }, [isSpotifyLoggedIn, userPlaylists, setUserPlaylists])
+    }, [isSpotifyLoggedIn, userPlaylists, setUserPlaylists, setTotalLikedSongs])
 
     const spotifyLogin = async() => {
         try {
@@ -143,7 +148,7 @@ export const SpotifyCard = ({
                             </button>
                         </div>
                     </div>
-                    <div ref={scrollRef} className="max-h-[460px] min-h-[460px] max-w-full flex flex-col overflow-y-scroll gap-1 overflow-hidden">
+                    <div ref={scrollRef} className="max-h-[460px] min-h-[460px] max-w-full flex flex-col overflow-y-scroll gap-1 overflow-hidden ">
                         {
                             currentSpotifyCard==='YourTracks' && userTracks && 
                             <SpotifyUserTracksCard userTracks={userTracks} selectedMusic={selectedMusic} setSelectedMusic={setSelectedMusic}/>
@@ -151,7 +156,7 @@ export const SpotifyCard = ({
 
                         {
                             currentSpotifyCard==='Playlists' && userPlaylists && 
-                            <SpotifyUserPlaylistCard userPlaylists={userPlaylists} selectedPlaylist={selectedPlaylist} setSelectedPlaylists={setSelectedPlaylists}/>
+                            <SpotifyUserPlaylistCard userPlaylists={userPlaylists} selectedPlaylist={selectedPlaylist} setSelectedPlaylists={setSelectedPlaylists} totalLikedSongs={totalLikedSongs}/>
                         }
                     </div>
                 </div>

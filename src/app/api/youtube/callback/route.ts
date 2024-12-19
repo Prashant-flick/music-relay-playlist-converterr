@@ -10,8 +10,8 @@ export async function GET(req: Request) {
     }
   
     try {
-      const client_id = process.env.YOUTUBE_CLIENT_ID;
-      const client_secret = process.env.YOUTUBE_CLIENT_SECRET;
+      const client_id = process.env.YOUTUBE_CLIENT_ID_4;
+      const client_secret = process.env.YOUTUBE_CLIENT_SECRET_4;
       const redirect_uri = process.env.YOUTUBE_REDIRECT_URI;
 
       const oauth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uri);

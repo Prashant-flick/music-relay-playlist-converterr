@@ -79,10 +79,11 @@ export const SpotifyToYoutubeCard = ({
 }: SpotifyToYoutubeCardProps) => {
     const [userTracks, setUserTracks] = useState<TrackProps[] | null>(null);
     const [userPlaylists, setUserPlaylists] = useState<PlaylistsProps[] | null>(null);
+    const [totalLikedSongs, setTotalLikedSongs] = useState<string | null>(null);
 
     return (
         <>
-            <SpotifyCard isSpotifyLoggedIn={isSpotifyLoggedIn} userTracks={userTracks} setUserTracks={setUserTracks} userPlaylists={userPlaylists} setUserPlaylists={setUserPlaylists} selectedMusic={selectedMusic} setSelectedMusic={setSelectedMusic} selectedPlaylist={selectedPlaylist} setSelectedPlaylists={setSelectedPlaylists} currentSpotifyCard={currentSpotifyCard} setCurrentSpotifyCard={setCurrentSpotifyCard}/>
+            <SpotifyCard isSpotifyLoggedIn={isSpotifyLoggedIn} userTracks={userTracks} setUserTracks={setUserTracks} userPlaylists={userPlaylists} setUserPlaylists={setUserPlaylists} selectedMusic={selectedMusic} setSelectedMusic={setSelectedMusic} selectedPlaylist={selectedPlaylist} setSelectedPlaylists={setSelectedPlaylists} currentSpotifyCard={currentSpotifyCard} setCurrentSpotifyCard={setCurrentSpotifyCard} totalLikedSongs={totalLikedSongs} setTotalLikedSongs={setTotalLikedSongs}/>
 
             <SpotifyTrackSelectionCard isSpotifyLoggedIn={isSpotifyLoggedIn} isYoutubeLoggedIn={isYoutubeLoggedIn} userTracks={userTracks} userPlaylists={userPlaylists} selectedMusic={selectedMusic} selectedPlaylist={selectedPlaylist} addPlaylist={addPlaylist} setAddPlaylist={setAddPlaylist} playlistName={playlistName} setPlaylistName={setPlaylistName} selectedPlaylistName={selectedPlaylistName} setSelectedPlaylistName={setSelectedPlaylistName} conversionOptions={conversionOptions} setConversionOption={setConversionOption} selectedConversionPlaylist={selectedConversionPlaylist} setSelectedConversionPlaylist={setSelectedConversionPlaylist} currentSpotifyCard={currentSpotifyCard} setCurrentSpotifyCard={setCurrentSpotifyCard}/>
         </>

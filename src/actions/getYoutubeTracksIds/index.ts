@@ -46,20 +46,20 @@ export const getYoutubeTracksIds = async({
     const accessToken = await axios.get('http://localhost:3000/api/getAccessTokens')
     const { youtubeAccessToken, spotifyAccessToken } = accessToken.data
     
-    console.log(spotifyPlaylist);
     const youtubeVideosIds: string[] = [];
     
     if(spotifyMusic && spotifyMusic.length>0 && youtubeAccessToken){
         try {
             await Promise.all(
                 spotifyMusic.map(async (elem) => {
-                    const name = `${elem.track.name} by ${elem.track.album.name}|${elem.track.album?.artists[0]?.name}`
-                    const url = `https://youtube.googleapis.com/youtube/v3/search?part=id&maxResults=1&q=${encodeURIComponent(name)}&type=video&videoCategoryId=10`;
+                    const name = `${elem.track.name} by ${elem.track.album?.artists[0]?.name}`
+                    const url = `https://youtube.googleapis.com/youtube/v3/search?part=id&maxResults=5&q=${encodeURIComponent(name)}&type=video`;
                     const res = await axios.get(url, {
                         headers: {
                             Authorization: `Bearer ${youtubeAccessToken}`,
                         },
                     });
+                    
                     if (res.data?.items?.length > 0) {
                         youtubeVideosIds.push(res.data.items[0].id.videoId);
                     }
@@ -71,36 +71,89 @@ export const getYoutubeTracksIds = async({
         }
     }else if(spotifyPlaylist && spotifyAccessToken && youtubeAccessToken){
         try {
-            const res = await axios.get(`https://api.spotify.com/v1/playlists/${spotifyPlaylist.id}/tracks`, {
-                headers: {
-                    Authorization: `Bearer ${spotifyAccessToken}`,
-                },
-            })
-
-            const playlistItems: playlistItemsProps = res.data
-
-            if(playlistItems && playlistItems.items.length>0){
-                await Promise.all(
-                    playlistItems?.items.map(async (elem) => {
-                        const name = `${elem.track.name} by ${elem.track.artists[0].name}|${elem.track.album.name}|Song`
-                        const url = `https://youtube.googleapis.com/youtube/v3/search?part=id&maxResults=1&q=${encodeURIComponent(name)}&type=video&videoCategoryId=10`;
-                        const res = await axios.get(url, {
-                            headers: {
-                                Authorization: `Bearer ${youtubeAccessToken}`,
-                            },
-                        });
-                        if (res.data?.items?.length > 0) {
-                            youtubeVideosIds.push(res.data.items[0].id.videoId);
+            if(spotifyPlaylist.name === 'liked songs'){
+                let playlistItems: TrackProps[] = []
+                let nextPageTrackUrl = '';
+                while(nextPageTrackUrl!==null){
+                    const res = await axios.get('/api/spotify/getUserTracks', {
+                        params: {
+                            nextPageUrl: nextPageTrackUrl
                         }
-                    })
-                );
+                    });
+                    playlistItems = [...playlistItems, ...res?.data?.items]
+                    nextPageTrackUrl = res?.data?.next;
+                }
+
+                
+
+                if(playlistItems && playlistItems.length>0){
+                    const playlistName = "New Playlist";
+                    const res1 = await createNewYoutubePlaylist({playlistName});
+
+                    await Promise.all(
+                        playlistItems?.map(async (elem) => {
+                            const name = `${elem.track.name} by ${elem.track.album.artists[0].name}|${elem.track.album.name}|Song`
+                            const url = `https://youtube.googleapis.com/youtube/v3/search?part=id&maxResults=1&q=${encodeURIComponent(name)}&type=video&videoCategoryId=10`;
+                            const res = await axios.get(url, {
+                                headers: {
+                                    Authorization: `Bearer ${youtubeAccessToken}`,
+                                },
+                            });
+                            if (res.data?.items?.length > 0) {
+                                const url1 = `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet`; 
+                                const data = {
+                                    snippet: {
+                                        playlistId: res1.data.id,
+                                        resourceId: {
+                                            videoId: res.data.items[0].id.videoId,
+                                            kind: "youtube#video",
+                                        }
+                                    }
+                                };
+                                console.log(res.data.items[0].id.videoId);
+                                await axios.post(url1, data, {
+                                    headers: {
+                                        Authorization: `Bearer ${youtubeAccessToken}`,
+                                        Accept: 'application/json',
+                                        'Content-Type': 'application/json'
+                                    }
+                                });
+                            }
+                        })
+                    );
+                }
+                
+            }else{
+                const res = await axios.get(`https://api.spotify.com/v1/playlists/${spotifyPlaylist.id}/tracks`, {
+                    headers: {
+                        Authorization: `Bearer ${spotifyAccessToken}`,
+                    },
+                })
+    
+                const playlistItems: playlistItemsProps = res.data
+    
+                if(playlistItems && playlistItems.items.length>0){
+                    await Promise.all(
+                        playlistItems?.items.map(async (elem) => {
+                            const name = `${elem.track.name} by ${elem.track.artists[0].name}|${elem.track.album.name}|Song`
+                            const url = `https://youtube.googleapis.com/youtube/v3/search?part=id&maxResults=1&q=${encodeURIComponent(name)}&type=video&videoCategoryId=10`;
+                            const res = await axios.get(url, {
+                                headers: {
+                                    Authorization: `Bearer ${youtubeAccessToken}`,
+                                },
+                            });
+                            if (res.data?.items?.length > 0) {
+                                youtubeVideosIds.push(res.data.items[0].id.videoId);
+                            }
+                        })
+                    );
+                }
             }
         } catch (error) {
             console.error("Error fetching video IDs:", error);
             return [];
         }
     }else{
-        console.log("here3");
         console.error("Selected Music is empty or not logged in to Youtube");
     }
 
@@ -187,8 +240,9 @@ export const addTracksToPlaylist = async({
 
     if(youtubeMusicIds && youtubeMusicIds.length>0 && youtubeAccessToken){
         try {
-            const url = `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet`;
+            const url = `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet`;            
             for(let i=0; i<youtubeMusicIds.length; i++){
+                console.log(youtubeMusicIds[i]);
                 const data = {
                     snippet: {
                         playlistId: id,
@@ -198,7 +252,6 @@ export const addTracksToPlaylist = async({
                         }
                     }
                 };
-                console.log(youtubeMusicIds[i]);
                 await axios.post(url, data, {
                     headers: {
                         Authorization: `Bearer ${youtubeAccessToken}`,
@@ -206,6 +259,8 @@ export const addTracksToPlaylist = async({
                         'Content-Type': 'application/json'
                     }
                 });
+
+                new Promise(resolve => setTimeout(resolve, 500));
             }
                 
             return {
